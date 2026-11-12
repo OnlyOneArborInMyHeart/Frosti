@@ -18,6 +18,7 @@ export const SITE_TITLE = config.site.title;
 export const SITE_DESCRIPTION = config.site.description;
 export const SITE_LANGUAGE = config.site.language;
 export const SITE_FAVICON = config.site.favicon;
+export const SITE_HOME = config.site.home;
 export const SITE_THEME = config.site.theme;
 export const DATE_FORMAT = config.site.date_format;
 

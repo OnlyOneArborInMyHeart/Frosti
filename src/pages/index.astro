@@ -1,180 +1,68 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { t } from "@config";
-import { Icon } from "astro-icon/components";
-import MainCard from "@/components/MainCard.astro";
-import FeatureCard from "@/components/mdx/FeatureCard.astro";
-import GitHubStats from "@/components/mdx/GitHubStats.astro";
+import "@/styles/global.scss";
+import Header from "@components/Header.astro";
+import { SITE_DESCRIPTION, SITE_FAVICON, SITE_HOME, SITE_LANGUAGE, SITE_TAB, SITE_TITLE } from "@config";
 ---
 
-<BaseLayout title="Home - Frosti Blog Theme">
-  <MainCard
-    title="Welcome to Kistory'Blog"
-    description="Of all weapons , the past cuts most."
-    textOverlay="HOME"
-    infoIcon="lucide:info"
-  >
-    <div class="space-y-8">
-      <!-- Hero Section -->
-      <section class="py-6">
-        <div class="flex flex-col items-center text-center">
-          <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            🌟 带一把雨伞当剑的博客
-          </h1>
-          <p class="text-xl text-base-content/80 max-w-3xl mb-8">
-            亦余心之所善兮，虽九死其犹未悔.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center">
-            <a href="/blog" class="btn btn-primary gap-2 btn-shine-effect">
-              <Icon name="lucide:book-open" class="w-5 h-5" />
-              <span>Explore Blog</span>
+<!doctype html>
+<html lang={SITE_LANGUAGE}>
+  <head>
+    <Header title={SITE_TITLE} description={SITE_DESCRIPTION} favicon={SITE_FAVICON} />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到主要内容</a>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label={`${SITE_TAB} 首页`}><span class="wordmark-dot" aria-hidden="true"></span>{SITE_TAB}</a>
+        <span class="header-label">PERSONAL JOURNAL</span>
+      </header>
+
+      <main id="content" class="intro">
+        <div class="intro-content">
+          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>{SITE_HOME.eyebrow}</p>
+          <h1>{SITE_HOME.title}</h1>
+          <p class="description">{SITE_HOME.description}</p>
+          <nav class="actions" aria-label="开始浏览">
+            <a class="primary-link" href={SITE_HOME.primary.href}>
+              {SITE_HOME.primary.text}
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             </a>
-            <a href="https://github.com/EveSunMaple/Frosti" target="_blank" class="btn btn-outline gap-2">
-              <Icon name="lucide:github" class="w-5 h-5" />
-              <span>Star on GitHub</span>
-            </a>
-          </div>
+          </nav>
         </div>
-      </section>
+        <div class="intro-mark" aria-hidden="true">K<span>.</span></div>
+      </main>
 
-      <!-- Features Section
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:sparkles" class="w-6 h-6 text-primary" />
-          <span>Features</span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <FeatureCard
-            title="Responsive Design"
-            description="Fully responsive design that looks great on all devices from mobile to desktop."
-            icon="lucide:smartphone"
-            color="oklch(0.7 0.2 30)"
-          />
-
-          <FeatureCard
-            title="Dark/Light Mode"
-            description="Toggle between light and dark themes with a beautiful transition effect."
-            icon="lucide:moon"
-            color="oklch(0.65 0.2 280)"
-          />
-
-          <FeatureCard
-            title="MDX Support"
-            description="Write your content in MDX with full support for React components and JSX."
-            icon="lucide:file-code"
-            color="oklch(0.6 0.2 160)"
-          />
-
-          <FeatureCard
-            title="SEO Optimized"
-            description="Built-in SEO optimization with meta tags, OpenGraph, and JSON-LD."
-            icon="lucide:search"
-            color="oklch(0.6 0.2 200)"
-          />
-
-          <FeatureCard
-            title="Fast Performance"
-            description="Optimized for speed with lazy loading, code splitting, and minimal JavaScript."
-            icon="lucide:zap"
-            color="oklch(0.8 0.2 80)"
-          />
-
-          <FeatureCard
-            title="Customizable"
-            description="Easily customize the theme to match your personal brand and preferences."
-            icon="lucide:palette"
-            color="oklch(0.7 0.2 10)"
-          />
-        </div>
-      </section> -->
-
-      <!-- Quick Start
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:rocket" class="w-6 h-6 text-primary" />
-          <span>Quick Start</span>
-        </h2>
-
-        <div class="card bg-base-200 p-6">
-          <h3 class="text-xl font-bold mb-4">Get started in three simple steps:</h3>
-
-          <ol class="space-y-6 mb-6">
-            <li class="relative flex flex-col gap-4 items-start">
-              <div class="flex gap-4 items-center">
-                <div
-                  class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content flex-shrink-0"
-                >
-                  1
-                </div>
-                <h4 class="font-bold">Clone the repository</h4>
-              </div>
-              <div class="relative w-full">
-                <p class="text-base-content/70 mb-2">Use Git to clone the Frosti repository to your local machine:</p>
-                <div class="mockup-code text-sm mb-2">
-                  <pre><code>git clone --depth 1 https://github.com/EveSunMaple/Frosti.git Frosti</code></pre>
-                </div>
-              </div>
-            </li>
-
-            <li class="relative flex flex-col gap-4 items-start">
-              <div class="flex gap-4 items-center">
-                <div
-                  class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content flex-shrink-0"
-                >
-                  2
-                </div>
-                <h4 class="font-bold">Install dependencies</h4>
-              </div>
-              <div class="relative w-full">
-                <p class="text-base-content/70 mb-2">Navigate to the project directory and install dependencies:</p>
-                <div class="mockup-code text-sm mb-2">
-                  <pre><code>cd Frosti && npm install</code></pre>
-                </div>
-              </div>
-            </li>
-
-            <li class="relative flex flex-col gap-4 items-start">
-              <div class="flex gap-4 items-center">
-                <div
-                  class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content flex-shrink-0"
-                >
-                  3
-                </div>
-                <h4 class="font-bold">Start the development server</h4>
-              </div>
-              <div class="relative w-full">
-                <p class="text-base-content/70 mb-2">Launch the local development server to see your blog:</p>
-                <div class="mockup-code text-sm mb-2">
-                  <pre><code>npm run build && npm run dev</code></pre>
-                </div>
-                <p class="text-base-content/70">
-                  Open your browser and navigate to <code class="bg-base-300 px-2 py-1 rounded"
-                    >http://localhost:4321</code
-                  > to see your blog in action!
-                </p>
-              </div>
-            </li>
-          </ol>
-
-          <div class="alert bg-primary/10 text-primary mb-0">
-            <Icon name="lucide:lightbulb" class="w-6 h-6" />
-            <span
-              >Check out the <a href="/blog" class="underline">blog section</a> for detailed guides and documentation.</span
-            >
-          </div>
-        </div>
-      </section> -->
-
-      <!-- GitHub Stats -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:github" class="w-6 h-6 text-primary" />
-          <span>Repository Stats</span>
-        </h2>
-
-        <GitHubStats username="OnlyOneArborInMyHeart" repositoryName="Frosti" showLanguages={true} showContributors={true} />
-      </section>
+      <footer class="site-footer"><span>{SITE_HOME.footer}</span><span>© {new Date().getFullYear()} {SITE_TITLE}</span></footer>
     </div>
-  </MainCard>
-</BaseLayout>
+  </body>
+</html>
+
+<style>
+  :global(html) { background: #f6f4ef; }
+  :global(body) { margin: 0; color: #20251f; font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif; }
+  :global(*), :global(*::before), :global(*::after) { box-sizing: border-box; }
+  .skip-link { position: absolute; z-index: 10; top: -4rem; left: 1rem; padding: .65rem 1rem; background: #20251f; color: white; }
+  .skip-link:focus { top: 1rem; }
+  .page-shell { min-height: 100svh; max-width: 1440px; margin: auto; padding: clamp(1.25rem, 4vw, 3.5rem) clamp(1.5rem, 7vw, 7rem); display: flex; flex-direction: column; }
+  .site-header, .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .wordmark { display: inline-flex; align-items: center; gap: .7rem; color: inherit; font-size: .95rem; font-weight: 700; text-decoration: none; }
+  .wordmark-dot { width: .65rem; height: .65rem; border-radius: 50%; background: #ad6947; }
+  .header-label, .eyebrow, .site-footer { color: #777c73; font-size: .72rem; letter-spacing: .13em; }
+  .intro { position: relative; flex: 1; display: flex; align-items: center; padding: 5rem 0; }
+  .intro-content { position: relative; z-index: 1; max-width: 710px; }
+  .eyebrow { display: flex; align-items: center; gap: .9rem; margin: 0 0 2rem; color: #976044; font-weight: 700; letter-spacing: .2em; }
+  .eyebrow-line { width: 2rem; height: 1px; background: currentColor; }
+  h1 { max-width: 12em; margin: 0; font-family: "Noto Serif SC", "Songti SC", "SimSun", serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 600; line-height: 1.2; letter-spacing: -.045em; }
+  .description { max-width: 34rem; margin: 2rem 0 0; color: #666d64; font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 2; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 3rem; }
+  .primary-link { display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 3.5rem; font-size: .95rem; font-weight: 600; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+  .primary-link { padding: .8rem 1.4rem; border-radius: .3rem; background: #283d32; color: #fff; }
+  .primary-link:hover { background: #385645; transform: translateY(-2px); }
+  .primary-link svg { width: 1.2rem; height: 1.2rem; }
+  .primary-link:focus-visible, .wordmark:focus-visible { outline: 3px solid #ad6947; outline-offset: 4px; }
+  .intro-mark { position: absolute; right: 0; bottom: 3%; color: #e9e6dc; font-family: Georgia, serif; font-size: clamp(12rem, 35vw, 32rem); line-height: 1; user-select: none; }
+  .intro-mark span { color: #e4d7cb; }
+  .site-footer { padding-top: 1.5rem; border-top: 1px solid #deded5; letter-spacing: .02em; }
+  @media (max-width: 640px) { .header-label { display: none; } .intro { padding: 5rem 0 7rem; } .intro-mark { right: -1rem; bottom: 4rem; opacity: .5; } .site-footer { align-items: flex-start; flex-direction: column; gap: .45rem; } }
+  @media (prefers-reduced-motion: reduce) { .primary-link { transition: none; } }
+</style>

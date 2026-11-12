@@ -2,9 +2,17 @@
 site:
   tab: Kistory的修养生息小站 # 浏览器标签栏上显示的文本
   title: Kistory'Blog # 网站的标题
-  description: A clean, elegant, and fast static blog template! 🚀 Developed with Astro # 网站的描述，用于SEO等
-  language: en # 网站的语言，例如 "en" 是英文
+  description: 记录技术、生活与沿途的思考。 # 网站的描述，用于SEO等
+  language: zh # 网站的语言；翻译文件中使用 zh
   favicon: /favicon.ico # 网站的图标，用于浏览器标签栏和其他地方显示
+  home: # 首页入口文案和按钮；修改这里即可自定义首页内容
+    eyebrow: KISTORY / NOTES
+    title: 带一把雨伞当剑
+    description: 记录技术、生活与沿途的思考。欢迎来到我的文字角落。
+    primary:
+      text: 进入博客
+      href: /blog
+    footer: 亦余心之所善兮，虽九死其犹未悔。
   theme: # 更多主题 https://daisyui.com/docs/themes/
     light: winter # 主题的浅色模式
     dark: dracula # 主题的深色模式
@@ -62,7 +70,7 @@ site:
 # 用户的个人信息
 user:
   name: Kistory # 用户名
-  site: "https://frosti.saroprock.com" # 用户的网站链接
+  site: "https://kistory.netlify.app" # 用户的网站链接
   avatar: /profile.png # 用户头像路径
   sidebar: # 侧边栏配置
     social:

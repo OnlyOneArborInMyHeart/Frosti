@@ -28,6 +28,13 @@ export interface SiteConfig {
   description: string;
   language: string;
   favicon: string;
+  home: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    primary: { text: string; href: string };
+    footer: string;
+  };
   theme: {
     light: string;
     dark: string;

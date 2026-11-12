@@ -9,7 +9,7 @@ site:
     avatar: /profile.webp # 圆形头像，可替换为 public 文件夹中的图片
     title: Kistory
     eyebrow: KISTORY'S BLOG
-    description: 带一把雨伞当剑，记录技术、生活与沿途的思考。
+    description: 欢迎来到我的世界！
     primary:
       text: 博客
       href: /blog

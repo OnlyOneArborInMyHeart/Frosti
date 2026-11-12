@@ -1,7 +1,8 @@
 ---
 import "@/styles/global.scss";
 import Header from "@components/Header.astro";
-import { SITE_DESCRIPTION, SITE_FAVICON, SITE_HOME, SITE_LANGUAGE, SITE_TAB, SITE_TITLE } from "@config";
+import { Icon } from "astro-icon/components";
+import { SITE_DESCRIPTION, SITE_FAVICON, SITE_HOME, SITE_LANGUAGE, SITE_TITLE } from "@config";
 ---
 
 <!doctype html>
@@ -10,59 +11,102 @@ import { SITE_DESCRIPTION, SITE_FAVICON, SITE_HOME, SITE_LANGUAGE, SITE_TAB, SIT
     <Header title={SITE_TITLE} description={SITE_DESCRIPTION} favicon={SITE_FAVICON} />
   </head>
   <body>
-    <a class="skip-link" href="#content">跳到主要内容</a>
-    <div class="page-shell">
-      <header class="site-header">
-        <a class="wordmark" href="/" aria-label={`${SITE_TAB} 首页`}><span class="wordmark-dot" aria-hidden="true"></span>{SITE_TAB}</a>
-        <span class="header-label">PERSONAL JOURNAL</span>
-      </header>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="stage" id="home">
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="light light-blue" aria-hidden="true"></div>
+      <div class="light light-purple" aria-hidden="true"></div>
 
-      <main id="content" class="intro">
-        <div class="intro-content">
-          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>{SITE_HOME.eyebrow}</p>
-          <h1>{SITE_HOME.title}</h1>
-          <p class="description">{SITE_HOME.description}</p>
-          <nav class="actions" aria-label="开始浏览">
-            <a class="primary-link" href={SITE_HOME.primary.href}>
-              {SITE_HOME.primary.text}
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </a>
-          </nav>
+      <main class="hero" id="main">
+        <div class="avatar-wrap">
+          <img src={SITE_HOME.avatar} alt={`${SITE_HOME.title} 的头像`} width="210" height="210" fetchpriority="high" />
         </div>
-        <div class="intro-mark" aria-hidden="true">K<span>.</span></div>
+        <h1>{SITE_HOME.title}</h1>
+        <p class="subtitle">{SITE_HOME.eyebrow}</p>
+        <p class="description">{SITE_HOME.description}</p>
+
+        <nav class="links" aria-label="网站入口">
+          <a class="pill" href={SITE_HOME.primary.href}>
+            <Icon name="lucide:pen-line" aria-hidden="true" />
+            <span>{SITE_HOME.primary.text}</span>
+          </a>
+          {SITE_HOME.links.map((link) => (
+            <a class="pill" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+              <Icon name={link.icon} aria-hidden="true" />
+              <span>{link.text}</span>
+            </a>
+          ))}
+        </nav>
       </main>
 
-      <footer class="site-footer"><span>{SITE_HOME.footer}</span><span>© {new Date().getFullYear()} {SITE_TITLE}</span></footer>
+      <nav class="section-nav" aria-label="页面导航">
+        <a class="section-current" href="#home" aria-current="page"><span>主页</span><span class="nav-dot active"></span></a>
+        <a class="section-next" href={SITE_HOME.primary.href} aria-label={SITE_HOME.primary.text}><span class="nav-dot"></span></a>
+      </nav>
+
+      <a class="bottom-cue" href={SITE_HOME.primary.href}>
+        <span>{SITE_HOME.footer}</span>
+        <Icon name="lucide:chevron-down" aria-hidden="true" />
+      </a>
     </div>
   </body>
 </html>
 
 <style>
-  :global(html) { background: #f6f4ef; }
-  :global(body) { margin: 0; color: #20251f; font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif; }
+  :global(html) { background: #080713; }
+  :global(body) { margin: 0; color: #f5f5ff; font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif; }
   :global(*), :global(*::before), :global(*::after) { box-sizing: border-box; }
-  .skip-link { position: absolute; z-index: 10; top: -4rem; left: 1rem; padding: .65rem 1rem; background: #20251f; color: white; }
+  .skip-link { position: fixed; z-index: 10; top: -5rem; left: 1rem; padding: .7rem 1rem; background: white; color: #0c0921; }
   .skip-link:focus { top: 1rem; }
-  .page-shell { min-height: 100svh; max-width: 1440px; margin: auto; padding: clamp(1.25rem, 4vw, 3.5rem) clamp(1.5rem, 7vw, 7rem); display: flex; flex-direction: column; }
-  .site-header, .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-  .wordmark { display: inline-flex; align-items: center; gap: .7rem; color: inherit; font-size: .95rem; font-weight: 700; text-decoration: none; }
-  .wordmark-dot { width: .65rem; height: .65rem; border-radius: 50%; background: #ad6947; }
-  .header-label, .eyebrow, .site-footer { color: #777c73; font-size: .72rem; letter-spacing: .13em; }
-  .intro { position: relative; flex: 1; display: flex; align-items: center; padding: 5rem 0; }
-  .intro-content { position: relative; z-index: 1; max-width: 710px; }
-  .eyebrow { display: flex; align-items: center; gap: .9rem; margin: 0 0 2rem; color: #976044; font-weight: 700; letter-spacing: .2em; }
-  .eyebrow-line { width: 2rem; height: 1px; background: currentColor; }
-  h1 { max-width: 12em; margin: 0; font-family: "Noto Serif SC", "Songti SC", "SimSun", serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 600; line-height: 1.2; letter-spacing: -.045em; }
-  .description { max-width: 34rem; margin: 2rem 0 0; color: #666d64; font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 2; }
-  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 3rem; }
-  .primary-link { display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 3.5rem; font-size: .95rem; font-weight: 600; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
-  .primary-link { padding: .8rem 1.4rem; border-radius: .3rem; background: #283d32; color: #fff; }
-  .primary-link:hover { background: #385645; transform: translateY(-2px); }
-  .primary-link svg { width: 1.2rem; height: 1.2rem; }
-  .primary-link:focus-visible, .wordmark:focus-visible { outline: 3px solid #ad6947; outline-offset: 4px; }
-  .intro-mark { position: absolute; right: 0; bottom: 3%; color: #e9e6dc; font-family: Georgia, serif; font-size: clamp(12rem, 35vw, 32rem); line-height: 1; user-select: none; }
-  .intro-mark span { color: #e4d7cb; }
-  .site-footer { padding-top: 1.5rem; border-top: 1px solid #deded5; letter-spacing: .02em; }
-  @media (max-width: 640px) { .header-label { display: none; } .intro { padding: 5rem 0 7rem; } .intro-mark { right: -1rem; bottom: 4rem; opacity: .5; } .site-footer { align-items: flex-start; flex-direction: column; gap: .45rem; } }
-  @media (prefers-reduced-motion: reduce) { .primary-link { transition: none; } }
+  .stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+    min-height: 100svh;
+    overflow: hidden;
+    padding: 5rem 2rem 7rem;
+    background:
+      radial-gradient(ellipse 53% 57% at 50% 42%, rgba(43, 42, 96, .4), transparent 74%),
+      radial-gradient(ellipse 46% 53% at 25% 73%, rgba(84, 26, 103, .18), transparent 75%),
+      radial-gradient(ellipse 42% 50% at 83% 67%, rgba(2, 58, 103, .15), transparent 76%),
+      #080713;
+  }
+  .orbit { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(120vw, 1500px); aspect-ratio: 1; border: 1px solid rgba(167, 166, 230, .07); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .orbit-one { width: min(80vw, 1040px); }
+  .light { position: absolute; z-index: -1; width: 34rem; height: 30rem; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .light-blue { top: 16%; left: 48%; background: rgba(37, 134, 229, .16); transform: translateX(-50%); }
+  .light-purple { top: 29%; left: 47%; background: rgba(195, 63, 192, .12); transform: translateX(-50%); }
+  .hero { display: flex; flex-direction: column; align-items: center; width: min(100%, 1150px); text-align: center; }
+  .avatar-wrap { width: clamp(9.5rem, 16vw, 13rem); aspect-ratio: 1; padding: 3px; border-radius: 50%; background: linear-gradient(135deg, #64e7ff, #955bff 55%, #ed84d9); box-shadow: 0 0 0 18px rgba(174, 153, 255, .035), 0 0 65px 12px rgba(65, 120, 231, .32), 0 32px 95px rgba(179, 80, 215, .24); }
+  .avatar-wrap img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center 42%; border: 3px solid #100c2a; }
+  h1 { margin: 2.3rem 0 0; font-size: clamp(4.5rem, 9vw, 7.8rem); font-weight: 850; line-height: 1.15; letter-spacing: -.06em; background: linear-gradient(90deg, #e1f9ff 4%, #48e1fa 45%, #667afc 90%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+  .subtitle { margin: .6rem 0 0; color: #a6a1c5; font-size: clamp(.85rem, 1.25vw, 1.2rem); font-weight: 600; letter-spacing: .42em; text-indent: .42em; }
+  .description { max-width: 48rem; margin: 3.6rem 0 0; color: #aaa6c8; font-size: clamp(1rem, 1.55vw, 1.35rem); line-height: 1.8; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: .85rem; margin-top: 3.3rem; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3rem; padding: .6rem 1.25rem; border: 1px solid rgba(195, 187, 232, .16); border-radius: 999px; background: rgba(255, 255, 255, .055); color: #c7c3e1; font-size: 1rem; font-weight: 550; text-decoration: none; backdrop-filter: blur(12px); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+  .pill :global(svg) { width: 1.2rem; height: 1.2rem; }
+  .pill:hover { transform: translateY(-3px); border-color: rgba(86, 225, 255, .65); background: rgba(78, 189, 236, .16); color: white; }
+  .pill:focus-visible, .section-nav a:focus-visible, .bottom-cue:focus-visible { outline: 2px solid #61e2fa; outline-offset: 5px; }
+  .section-nav { position: absolute; right: clamp(1.2rem, 2.8vw, 3rem); top: 50%; display: flex; align-items: flex-end; flex-direction: column; gap: 1.2rem; transform: translateY(-50%); }
+  .section-nav a { display: flex; align-items: center; justify-content: flex-end; gap: .7rem; color: #eeeefd; font-size: .9rem; text-decoration: none; }
+  .nav-dot { width: .8rem; height: .8rem; border: 1px solid #777a9b; border-radius: 50%; }
+  .nav-dot.active { width: .95rem; height: .95rem; border: none; background: #3cdfff; box-shadow: 0 0 16px 5px rgba(49, 215, 255, .55); }
+  .bottom-cue { position: absolute; bottom: 2.1rem; left: 50%; display: flex; align-items: center; flex-direction: column; gap: .2rem; color: #8986ab; font-size: .82rem; text-decoration: none; transform: translateX(-50%); white-space: nowrap; }
+  .bottom-cue :global(svg) { width: 1.25rem; height: 1.25rem; }
+  .bottom-cue:hover { color: #e4e9ff; }
+  @media (max-width: 720px) {
+    .stage { padding: 4rem 1.25rem 6rem; }
+    .hero { margin-top: -.5rem; }
+    .avatar-wrap { width: 9rem; }
+    h1 { margin-top: 1.7rem; }
+    .description { margin-top: 2.5rem; }
+    .links { margin-top: 2.4rem; gap: .65rem; }
+    .pill { min-height: 2.8rem; padding: .55rem 1rem; font-size: .9rem; }
+    .section-nav { display: none; }
+    .orbit-one { width: 125vw; }
+    .orbit-two { width: 190vw; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pill { transition: none; } }
 </style>

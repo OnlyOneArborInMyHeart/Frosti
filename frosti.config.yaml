@@ -6,13 +6,24 @@ site:
   language: zh # 网站的语言；翻译文件中使用 zh
   favicon: /favicon.ico # 网站的图标，用于浏览器标签栏和其他地方显示
   home: # 首页入口文案和按钮；修改这里即可自定义首页内容
-    eyebrow: KISTORY / NOTES
-    title: 带一把雨伞当剑
-    description: 记录技术、生活与沿途的思考。欢迎来到我的文字角落。
+    avatar: /profile.webp # 圆形头像，可替换为 public 文件夹中的图片
+    title: Kistory
+    eyebrow: KISTORY'S BLOG
+    description: 带一把雨伞当剑，记录技术、生活与沿途的思考。
     primary:
-      text: 进入博客
+      text: 博客
       href: /blog
-    footer: 亦余心之所善兮，虽九死其犹未悔。
+    links: # 下面的胶囊按钮；可增删，图标使用 Iconify 名称
+      - text: 文章归档
+        href: /blog/archives
+        icon: lucide:archive
+      - text: 标签
+        href: /blog/tags
+        icon: lucide:tags
+      - text: GitHub
+        href: https://github.com/OnlyOneArborInMyHeart
+        icon: lucide:github
+    footer: 探索博客
   theme: # 更多主题 https://daisyui.com/docs/themes/
     light: winter # 主题的浅色模式
     dark: dracula # 主题的深色模式

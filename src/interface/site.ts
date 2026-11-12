@@ -29,10 +29,12 @@ export interface SiteConfig {
   language: string;
   favicon: string;
   home: {
+    avatar: string;
     eyebrow: string;
     title: string;
     description: string;
     primary: { text: string; href: string };
+    links: { text: string; href: string; icon: string }[];
     footer: string;
   };
   theme: {
